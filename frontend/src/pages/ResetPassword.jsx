@@ -9,6 +9,7 @@ function ResetPassword() {
   const [user, setUser] = useState({ email:location.state?.email,pass: "", repass: "" });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [showPass,setshowPass]=useState(false)
   const navigate = useNavigate();
   useEffect(()=>{
     if (!location.state) {
@@ -46,7 +47,7 @@ function ResetPassword() {
           <form className="form_container" onSubmit={handleSubmit}>
             <span className={`text-green-400 text-md font-medium my-2`}></span>
             <input
-              type="password"
+              type={showPass? 'text':"password"}
               placeholder="Enter new password"
               name="pass"
               className={` input my-2`}
@@ -58,7 +59,7 @@ function ResetPassword() {
               <span className="text-red-400">{error}</span>
             </div>
             <input
-              type="password"
+              type={showPass? 'text':"password"}
               placeholder="Re enter new password"
               name="otp"
               required
@@ -66,7 +67,10 @@ function ResetPassword() {
               value={user.repass}
               onChange={(e)=>setUser({...user,repass:e.target.value})}
             />
-            
+             <div className="flex  w-1/2 ml-5">
+                <input  onChange={() => setshowPass(!showPass)} type="checkbox" />
+                <span className="mx-1">show</span>
+              </div>
             <div></div>
             <button type="submit" className="green_btn">
               {loading ? (

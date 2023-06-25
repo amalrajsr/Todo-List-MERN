@@ -11,6 +11,7 @@ function Form({
 }) {
   const [user, setUser] = useState({ email: "", password: "" });
   const [error, setError] = useState({ email: "", password: "" });
+  const [showPass,setshowPass]=useState(false)
   const location = useLocation();
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -66,7 +67,7 @@ function Form({
               <span className="text-red-400">{error.email}</span>
             </div>
             <input
-              type="password"
+              type={showPass? 'text':"password"}
               placeholder="Password"
               name="password"
               required
@@ -74,6 +75,10 @@ function Form({
               value={user.password}
               onChange={(e) => handlePassword(e)}
             />
+            <div className="self-start ml-2">
+                <input  onChange={() => setshowPass(!showPass)} type="checkbox" />
+                <span className="mx-1">show</span>
+              </div>
             <div>
               <span className="text-red-400">{error.password}</span>
             </div>

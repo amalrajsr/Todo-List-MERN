@@ -26,7 +26,7 @@ function Todo() {
         data.todos?.length && setTodos(data.todos);
       })
       .catch((error) => {
-        toast.error(error.response?.data?.error.message);
+        
       });
       inputRef.current.focus()
   }, [fetch]);
@@ -107,7 +107,7 @@ function Todo() {
             <form className="flex" onSubmit={edit ? updateTodo : addTodo}>
               <input
               ref={inputRef}
-                className="shadow appearance-none outline-none focus:outline-red-300 rounded w-full py-2 px-3 mr-4 text-grey-darker"
+                className="shadow-md outline-none rounded w-full py-2 px-3 mr-4 text-grey-darker"
                 placeholder="Add Todo"
                 value={currentTodo}
                 onChange={(e) => setCurrentTodo(e.target.value)}
@@ -130,16 +130,20 @@ function Todo() {
                   {item.task}
                 </p>
                 <TodoBtn
-                  customStyle={item.status ? "disabled bg-gray-300 " : ""}
+                  status={item.status}
+                  customStyle={item.status ? " bg-gray-300 " : ""}
                   handleFunction={() => completeTodo(item._id)}
                 >
                   Done
                 </TodoBtn>
                 <TodoBtn
+                status={item.status}
                   handleFunction={() => {
                     setEdit(item._id);
                     setCurrentTodo(item.task);
+                    inputRef.current.focus()
                   }}
+                  customStyle={item.status ? "hover:bg-none bg-gray-300 " : ""}
                 >
                   Edit
                 </TodoBtn>

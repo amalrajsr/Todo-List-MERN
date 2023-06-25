@@ -1,4 +1,4 @@
-import React, {  useState } from "react";
+import React, { useState } from "react";
 import "./form.css";
 import { Link, useLocation } from "react-router-dom";
 function Form({
@@ -7,14 +7,15 @@ function Form({
   buttonName,
   redirectBtnName,
   handleFunction,
+  formType,
 }) {
   const [user, setUser] = useState({ email: "", password: "" });
   const [error, setError] = useState({ email: "", password: "" });
-  const location=useLocation()
+  const location = useLocation();
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!error.email.length && !error.password.length) {
-      handleFunction(user)
+      handleFunction(user);
     }
   };
   const handleEmail = (e) => {
@@ -49,7 +50,9 @@ function Form({
             method="post"
             onSubmit={handleSubmit}
           >
-            <span className={`text-green-400 text-md font-medium my-2`}>{location.state?.message || ''}</span>
+            <span className={`text-green-400 text-md font-medium my-2`}>
+              {location.state?.message || ""}
+            </span>
             <input
               type="email"
               placeholder="Email"
@@ -78,7 +81,11 @@ function Form({
               {buttonName}
             </button>
           </form>
-
+          {formType === "login" && (
+            <Link to={"/forgot-password"}>
+              <p>Forgot Password</p>
+            </Link>
+          )}
         </div>
         <div className="right">
           <Link to={redirect}>

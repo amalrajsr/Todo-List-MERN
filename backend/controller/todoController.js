@@ -7,7 +7,7 @@ const fetchTodos = expressAsyncHandler(async (req, res, next) => {
     { userId: req.id },
     { todos: 1, _id: 0 }
   );
-  todoList.todos.reverse();
+  todoList.todos?.reverse();
   res.json(todoList);
 });
 

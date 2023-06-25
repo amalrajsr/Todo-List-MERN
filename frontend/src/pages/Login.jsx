@@ -34,6 +34,7 @@ function Login() {
         buttonName={loading ? <ClipLoader color="#ffff" size={20} /> : "Login"}
         redirectBtnName={"Sign up"}
         handleFunction={handleLogin}
+        formType={'login'}
       />
     )
   );

@@ -28,7 +28,7 @@ function Todo() {
       .catch((error) => {
         
       });
-      inputRef.current.focus()
+      inputRef.current?.focus()
   }, [fetch]);
 
   //add

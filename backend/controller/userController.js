@@ -24,7 +24,7 @@ const handleLogin = expressAsyncHandler(async (req, res) => {
   if (!email || !password) throw new AppError(400, "invalid request");
   const userExist = await userModel.findOne({ email: email });
   if (!userExist) throw new AppError(400, "invalid email or password");
-  const match = bcrypt.compare(password, userExist.password);
+  const match = await bcrypt.compare(password, userExist.password);
   if (!match) throw new AppError(400, "invalid email or password");
   const token = jwt.createToken(userExist._id);
   res.json({
